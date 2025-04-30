@@ -15,32 +15,48 @@ export default class InstancesList extends Command {
             char: "f",
             description: "Force rewrite the instance",
         }),
+        name: Flags.string({
+            char: "n",
+            description: "Name of the instance",
+        }),
+        host: Flags.string({
+            char: "h",
+            description: "Host",
+        }),
+        token: Flags.string({
+            char: "t",
+            description: "API Token",
+        }),
     };
 
     public async run(): Promise<void> {
         const { flags } = await this.parse(InstancesList);
 
-        const url = await input({
-            message: "Enter your coolify instance URL",
-            default: "https://app.coolify.io",
-            required: true,
-        });
+        // const url = await input({
+        //     message: "Enter your coolify instance URL",
+        //     default: "https://app.coolify.io",
+        //     required: true,
+        // });
+        //
+        // const password = await input({
+        //     message: "Enter your coolify API Token",
+        //     required: true,
+        // });
+        //
+        // const name = await input({
+        //     message: "Enter a name for this instance",
+        //     default: "MyApp",
+        //     required: true,
+        // });
 
-        const password = await input({
-            message: "Enter your coolify API Token",
-            required: true,
-        });
-
-        const name = await input({
-            message: "Enter a name for this instance",
-            default: "MyApp",
-            required: true,
-        });
+        const name = flags.name;
+        const host = flags.host;
+        const token = flags.token;
 
         ux.action.start("Logging in to your coolify instance...");
 
         try {
-            await Coolify.addInstance(url, password, name, flags.force);
+            await Coolify.addInstance(host, token, name, flags.force);
 
             Log.success(
                 ["Successfully logged in to your coolify instance"],
