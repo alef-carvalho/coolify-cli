@@ -15,17 +15,20 @@ export default class InstancesList extends Command {
             char: "f",
             description: "Force rewrite the instance",
         }),
-        name: Flags.string({
-            char: "n",
-            description: "Name of the instance",
-        }),
         host: Flags.string({
             char: "h",
             description: "Host",
+            required: true,
+        }),
+        name: Flags.string({
+            char: "n",
+            description: "Name of the instance",
+            required: true,
         }),
         token: Flags.string({
             char: "t",
             description: "API Token",
+            required: true,
         }),
     };
 
@@ -49,9 +52,7 @@ export default class InstancesList extends Command {
         //     required: true,
         // });
 
-        const name = flags.name;
-        const host = flags.host;
-        const token = flags.token;
+        const {host, name, token} = (flags!);
 
         ux.action.start("Logging in to your coolify instance...");
 
