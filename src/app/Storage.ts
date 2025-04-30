@@ -16,6 +16,9 @@ class Storage {
     constructor() {}
 
     async append(key: keyof StorageValues, value: any) {
+        
+        console.log("CF:: Config Dir: " + this.config?.configDir);
+        
         if (!this.data) return;
 
         this.data[key] = value;
@@ -24,6 +27,9 @@ class Storage {
     }
 
     get<T>(key: keyof StorageValues, defaultValue?: T): T {
+        
+        console.log("CF:: Config Dir: " + this.config?.configDir);
+
         if (!this.data) return defaultValue as T;
 
         return (this.data[key] as T) || (defaultValue as T);
@@ -31,7 +37,7 @@ class Storage {
 
     async save() {
         
-        console.log("config dir: " + this.config?.configDir);
+        console.log("CF:: Config Dir: " + this.config?.configDir);
         
         if (!this.config) return;
 
