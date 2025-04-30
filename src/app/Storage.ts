@@ -30,6 +30,9 @@ class Storage {
     }
 
     async save() {
+        
+        console.log("config dir: " + this.config?.configDir);
+        
         if (!this.config) return;
 
         if ((await fsExtra.pathExists(this.config.configDir)) === false) {
