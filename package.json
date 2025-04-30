@@ -1,5 +1,5 @@
 {
-  "name": "coolify",
+  "name": "coolify-cli-sdk",
   "description": "Coolify CLI is a user-friendly command-line tool that simplifies the deployment and management of applications.",
   "version": "2.0.8",
   "author": "Luca-Sordetti",
