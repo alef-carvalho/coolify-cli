@@ -66,6 +66,8 @@ class Storage {
             });
         }
 
+        console.log("config dir load: " + this.config?.configDir);
+        
         let data;
 
         try {
