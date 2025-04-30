@@ -1,6 +1,7 @@
 import { Config } from "@oclif/core";
 import fsExtra from "fs-extra";
 import * as path from "path";
+import * as os from 'os';
 import { fileURLToPath } from "url";
 import { ApplicationInterface, InstanceInterface } from "../types/index.js";
 
@@ -16,9 +17,7 @@ class Storage {
     constructor() {}
 
     async append(key: keyof StorageValues, value: any) {
-        
-        console.log("CF:: Config Dir: " + this.config?.configDir);
-        
+                
         if (!this.data) return;
 
         this.data[key] = value;
@@ -28,17 +27,13 @@ class Storage {
 
     get<T>(key: keyof StorageValues, defaultValue?: T): T {
         
-        console.log("CF:: Config Dir: " + this.config?.configDir);
-
         if (!this.data) return defaultValue as T;
 
         return (this.data[key] as T) || (defaultValue as T);
     }
 
     async save() {
-        
-        console.log("CF:: Config Dir: " + this.config?.configDir);
-        
+                
         if (!this.config) return;
 
         if ((await fsExtra.pathExists(this.config.configDir)) === false) {
@@ -67,13 +62,12 @@ class Storage {
     async load() {
         if (!this.config) {
             this.config = await Config.load({
-                root: path.resolve(fileURLToPath(import.meta.url), ".."),
+                root: this.config?.configDir,
+                // root: path.resolve(fileURLToPath(import.meta.url), ".."),
                 enablePerf: true,
             });
         }
 
-        console.log("config dir load: " + this.config?.configDir);
-        console.log("config dir load2: " + path.resolve(fileURLToPath(import.meta.url), ".."));
 
         let data;
 
