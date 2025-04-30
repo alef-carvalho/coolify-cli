@@ -60,9 +60,10 @@ class Storage {
     }
 
     async load() {
+                
         if (!this.config) {
             this.config = await Config.load({
-                root: this.config?.configDir,
+                root: path.join(os.homedir(), ".config", "coolify"),
                 // root: path.resolve(fileURLToPath(import.meta.url), ".."),
                 enablePerf: true,
             });
