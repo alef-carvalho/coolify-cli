@@ -73,7 +73,8 @@ class Storage {
         }
 
         console.log("config dir load: " + this.config?.configDir);
-        
+        console.log("config dir load2: " + path.resolve(fileURLToPath(import.meta.url), ".."));
+
         let data;
 
         try {
